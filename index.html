@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>VR Teleportation App</title>
+    <!-- A-Frame Core Library -->
+    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    
+    <!-- Environment Generator -->
+    <script src="https://unpkg.com/aframe-environment-component@1.3.3/dist/aframe-environment-component.min.js"></script>
+    
+    <!-- Teleport Controls Component -->
+    <script src="https://rawgit.com/fernandojsg/aframe-teleport-controls/master/dist/aframe-teleport-controls.min.js"></script>
+  </head>
+  <body>
+    <a-scene>
+      <!-- Generate a stylized 3D world (try changing 'contact' to 'forest', 'volcano', or 'tron') -->
+      <a-entity environment="preset: contact; groundColor: #445; grid: cross"></a-entity>
+
+      <!-- The Camera Rig: Grouping the camera and hands together so they teleport as one unit -->
+      <a-entity id="cameraRig" position="0 0 0">
+        
+        <!-- The user's head/viewpoint -->
+        <a-entity id="head" camera look-controls position="0 1.6 0"></a-entity>
+
+        <!-- Left Hand Controller -->
+        <a-entity id="left-hand"
+                  teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger"
+                  vive-controls="hand: left"
+                  oculus-touch-controls="hand: left"
+                  windows-motion-controls="hand: left">
+        </a-entity>
+
+        <!-- Right Hand Controller -->
+        <a-entity id="right-hand"
+                  teleport-controls="cameraRig: #cameraRig; teleportOrigin: #head; button: trigger"
+                  vive-controls="hand: right"
+                  oculus-touch-controls="hand: right"
+                  windows-motion-controls="hand: right">
+        </a-entity>
+        
+      </a-entity>
+    </a-scene>
+  </body>
+</html>
